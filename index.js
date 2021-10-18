@@ -22,12 +22,16 @@ addBtn.addEventListener("click", function (e) {
     }
 
     if (addTitle.value === "" || addDesc.value === "") {
-        msgBox.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        msgBox.innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Error !!</strong> All fields are required.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>`
+
+        setTimeout(() => {
+            msgBox.innerHTML = "";
+        }, 2000);
     }
     else {
         notesObj.push(myObj);
@@ -40,6 +44,10 @@ addBtn.addEventListener("click", function (e) {
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>`
+
+        setTimeout(() => {
+            msgBox.innerHTML = "";
+        }, 2000);
         showNotes();
     }
 
@@ -84,6 +92,17 @@ function deletenote(index) {
     else {
         notesObj = JSON.parse(notes);
     }
+
+    msgBox.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Your note is successfully deleted.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>`
+
+    setTimeout(() => {
+        msgBox.innerHTML = "";
+    }, 2000);
 
     notesObj.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notesObj));
