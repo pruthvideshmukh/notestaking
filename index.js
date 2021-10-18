@@ -1,5 +1,7 @@
 showNotes();
 let addBtn = document.getElementById('addBtn');
+let msgBox = document.getElementById('msgBox');
+
 addBtn.addEventListener("click", function (e) {
 
     let addTitle = document.getElementById('addTitle');
@@ -17,14 +19,29 @@ addBtn.addEventListener("click", function (e) {
     let myObj = {
         title: addTitle.value,
         text: addDesc.value
-      }
+    }
 
-    notesObj.push(myObj);
-    localStorage.setItem("notes", JSON.stringify(notesObj));
-    addDesc.value = "";
-    addTitle.value = "";
-    // console.log(notesObj);
-    showNotes();
+    if (addTitle.value === "" || addDesc.value === "") {
+        msgBox.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Error !!</strong> All fields are required.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>`
+    }
+    else {
+        notesObj.push(myObj);
+        localStorage.setItem("notes", JSON.stringify(notesObj));
+        addDesc.value = "";
+        addTitle.value = "";
+        msgBox.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success !!</strong> You have successfully added your note.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>`
+        showNotes();
+    }
 
 });
 
@@ -53,13 +70,13 @@ function showNotes() {
     if (notesObj.length != 0) {
         notesElm.innerHTML = html;
     }
-    else{
+    else {
         notesElm.innerHTML = `Nothing to show! Use "Add Note" above to add notes.`
     }
 };
 
 function deletenote(index) {
-    let notes = localStorage.getItem("notes"); 
+    let notes = localStorage.getItem("notes");
 
     if (notes == null) {
         notesObj = [];
@@ -68,7 +85,7 @@ function deletenote(index) {
         notesObj = JSON.parse(notes);
     }
 
-    notesObj.splice(index,1);
+    notesObj.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notesObj));
     showNotes()
 }
@@ -78,15 +95,15 @@ search.addEventListener("input", function () {
 
     let inputVal = search.value.toLowerCase();
     let noteCard = document.getElementsByClassName('noteCard');
-    
+
     Array.from(noteCard).forEach(function (element) {
         let cardTxt = element.getElementsByTagName("p")[0].innerText;
         let titleTxt = element.getElementsByTagName("h5")[0].innerText;
 
-        if(cardTxt.includes(inputVal) || titleTxt.includes(inputVal)){
+        if (cardTxt.includes(inputVal) || titleTxt.includes(inputVal)) {
             element.style.display = "block";
         }
-        else{
+        else {
             element.style.display = "none";
         }
     })
