@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">e-Notes</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,11 +25,15 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="searchTxt" type="search" aria-label="Search" placeholder="Search your notes...">
+                <input class="form-control mr-sm-2" id="searchTxt" type="search" aria-label="Search" placeholder="Search your notes..." autocomplete="off">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>
+
+    <div class="container" id="msgBox">
+
+    </div>
 
     <div class="container my-4">
         <h1 class="my-2">Welcome to e-Notes</h1>
